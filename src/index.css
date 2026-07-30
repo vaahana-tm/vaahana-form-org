@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-white: #FFFFFF;
+  --color-softGray: #F8FAFC;
+  --color-slate-100: #F1F5F9;
+  --color-slate-200: #E2E8F0;
+  --color-trafficBlue: #2563EB;
+  --color-smartCyan: #06B6D4;
+  --color-pureAzure: #3B82F6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  
+  --font-poppins: "Poppins", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  
+  --background-image-light-gradient: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F0FDFA 100%);
+  --background-image-vibrant-glow: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.05) 0%, transparent 80%);
+}
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #0F172A;
+}
+
+/* ── Mobile-first globals ─────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  /* Safe-area insets handled inline in app containers */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent the 3-D canvas from hijacking touch scroll */
+canvas {
+  touch-action: none;
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-3xl saturate-200 border border-white/20 shadow-[0_24px_50px_-12px_rgba(0,0,0,0.5)] rounded-[2.5rem];
+    /* Full-width on phones, constrained on larger screens */
+    width: 100%;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .dark-glass {
+    @apply bg-black/40 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-3xl;
+  }
+
+  /* Premium hover state for interactive glass elements */
+  .glass-hover {
+    @apply transition-all duration-500 hover:bg-white/20 hover:border-white/30 hover:shadow-white/5;
+  }
+}
+
+/* ── Scrollable form area on small screens ──────────────────── */
+.form-scroll-area {
+  overflow-y: auto;
+  max-height: calc(100dvh - 120px);
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom, 24px);
+}
+
+.bg-splash {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: var(--background-image-vibrant-glow);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Global Scrollbar Suppression ─────────────────────────── */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
