@@ -26,20 +26,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Temporary - remove after confirming secrets work
-      - name: Verify environment variables
-        run: |
-          echo "URL present: $([ -n "$VITE_SUPABASE_URL" ] && echo YES || echo NO)"
-          echo "KEY present: $([ -n "$VITE_SUPABASE_ANON_KEY" ] && echo YES || echo NO)"
-        env:
-          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+    
+      
 
       - name: Build project
         run: npm run build
         env:
-          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
       - name: Upload Build Artifacts
         uses: actions/upload-pages-artifact@v3
