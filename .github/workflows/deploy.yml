@@ -15,15 +15,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+
+      # Temporary - remove after confirming secrets work
+      - name: Verify environment variables
+        run: |
+          echo "URL present: $([ -n "$VITE_SUPABASE_URL" ] && echo YES || echo NO)"
+          echo "KEY present: $([ -n "$VITE_SUPABASE_ANON_KEY" ] && echo YES || echo NO)"
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Build project
         run: npm run build
